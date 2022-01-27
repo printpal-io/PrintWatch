@@ -18,7 +18,7 @@
     </a>
 </p>
 <h3 align="center">
-  OctoPrint-PrintWatch
+  PrintWatch API
 </h3>
 <p>
   PrintWatch uses Artificial Intelligence to monitor your 3D prints for any defects that begin to form. The plugin takes the video feed from any camera and runs it through a Machine Learning model that detects print defects in real-time. This repository is for custom integrations of the API, if you are using OctoPrint, refer to the <a href="https://github.com/printpal-io/OctoPrint-PrintWatch">OctoPrint-PrintWatch repository</a>
