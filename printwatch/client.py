@@ -10,18 +10,15 @@ class PrintWatchClient():
     def __init__(self, stream=None):
         self.parameters = {}
         self.stream = stream
-        self.route = 'printwatch-printpal.pythonanywhere.com'
+        self.route = 'http://printwatch-printpal.pythonanywhere.com'
 
     def _load_stream(self, source):
         self.stream = source
 
-    def _create_payload(self, image, encodingb64=True):
+    def _create_payload(self, image):
         self.parameters['image_array'] = image
         if len(self.parameters) < 1:
             self._dummy()
-        if encodingb64:
-            return b64encode(dumps(self.parameters).encode('utf8')).decode('utf8')
-
         return dumps(self.parameters).encode('utf8')
 
     def _dummy(self, api_key):
@@ -54,7 +51,7 @@ class PrintWatchClient():
 
     def _send_request(self, frame=None):
         _inference_image = self._get_frame(frame)
-        return _load(self._request(_inference_image))
+        return self._load(self._request(_inference_image))
 
 
     def _request(self, image):
@@ -71,7 +68,7 @@ class PrintWatchClient():
                 #stream will need to be an object
                 return self.stream.frame
 
-        return frame
+        return b64encode(frame).decode('utf8')
 
     def send_infer(self, image, api_key, parameters=None):
         if parameters is None:

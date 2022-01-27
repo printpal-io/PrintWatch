@@ -39,7 +39,7 @@ api_key = 'your_secret_key'
 client = printwatch.client.PrintWatchClient()
 
 #Load example image
-with open('test_image.jpg', 'rb') as f:
+with open('inf_img.jpg', 'rb') as f:
   image = bytearray(f.read())
 
 # Inference
