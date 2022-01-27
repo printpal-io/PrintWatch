@@ -73,7 +73,7 @@ class PrintWatchClient():
 
         return frame
 
-    def send_infer(self, image, parameters=None, api_key):
+    def send_infer(self, image, api_key, parameters=None):
         if parameters is None:
             self._dummy(api_key)
         else:
