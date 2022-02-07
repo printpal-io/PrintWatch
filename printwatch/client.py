@@ -8,7 +8,7 @@ from base64 import b64encode
 
 class PrintWatchClient():
     def __init__(self, stream=None):
-        self.parameters = {}
+        self.parameters = None
         self.stream = stream
         self.route = 'http://printwatch-printpal.pythonanywhere.com'
 
@@ -72,8 +72,8 @@ class PrintWatchClient():
         return b64encode(frame).decode('utf8')
 
     def send_infer(self, image, api_key, parameters=None):
-        if parameters is None:
-            self._dummy(api_key)
-        else:
+        if parameters is not None:
             self.parameters = parameters
+        elif parameters is None and self.parameters is None:
+            self._dummy(api_key)
         return self._send_request(image)
