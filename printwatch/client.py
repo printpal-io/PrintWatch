@@ -27,7 +27,8 @@ class PrintWatchClient():
                 'enable_email_notification': False,
                 'confidence': 60,
                 'enable_feedback_images': True,
-                'api_key': api_key
+                'api_key': api_key,
+                'email_addr' : ''
             },
             'parameters': {
                 'last_t': 0.0,
