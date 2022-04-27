@@ -8,21 +8,25 @@ from base64 import b64encode
 
 class PrintWatchClient():
     def __init__(self, stream=None):
-        self.parameters = None
+        self.parameters = []
         self.stream = stream
         self.route = 'http://printwatch-printpal.pythonanywhere.com'
 
     def _load_stream(self, source):
         self.stream = source
 
-    def _create_payload(self, image):
-        self.parameters['image_array'] = image
-        if len(self.parameters) < 1:
-            self._dummy()
-        return dumps(self.parameters).encode('utf8')
+    def _create_payload(self, image, idx=-1):
+        try:
+            self.parameters[idx]
+        except:
+            return
+
+        self.parameters[idx]['image_array'] = image
+        return dumps(self.parameters[idx]).encode('utf8')
 
     def _dummy(self, api_key):
-        self.parameters = {
+        self.parameters.append(
+         {
             'settings': {
                 'enable_email_notification': False,
                 'confidence': 60,
@@ -49,14 +53,15 @@ class PrintWatchClient():
                 }
             }
         }
+        )
 
-    def _send_request(self, frame=None):
+    def _send_request(self, frame=None, idx=-1):
         _inference_image = self._get_frame(frame)
-        return self._load(self._request(_inference_image))
+        return self._load(self._request(_inference_image, idx))
 
 
-    def _request(self, image):
-        return Request(f'{self.route}/inference/', data=self._create_payload(image), method='POST')
+    def _request(self, image, idx=-1):
+        return Request(f'{self.route}/inference/', data=self._create_payload(image, idx), method='POST')
 
     def _load(self, _request=None):
         if _request is None:
@@ -71,9 +76,13 @@ class PrintWatchClient():
 
         return b64encode(frame).decode('utf8')
 
-    def send_infer(self, image, api_key, parameters=None):
+    def send_infer(self, image, api_key, parameters=None, idx=-1):
         if parameters is not None:
-            self.parameters = parameters
-        elif parameters is None and self.parameters is None:
-            self._dummy(api_key)
-        return self._send_request(image)
+            if index >= 0:
+                self.parameters[idx] = parameters
+            else:
+                self.parameters.append(parameters)
+        else:
+            if idx < 0 or len(self.parameters) < idx + 1:
+                self._dummy(api_key)
+        return self._send_request(image, idx)
