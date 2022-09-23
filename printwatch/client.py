@@ -27,12 +27,16 @@ class PrintWatchClient():
     def _dummy(self, api_key):
         self.parameters.append(
          {
+            'scores' : [],
+            'version' : '1.1.111',
             'settings': {
                 'enable_email_notification': False,
                 'confidence': 60,
                 'enable_feedback_images': True,
                 'api_key': api_key,
-                'email_addr' : ''
+                'email_addr' : '',
+                'buffer_percent' : 60,
+                'buffer_length' : 8
             },
             'parameters': {
                 'last_t': 0.0,
