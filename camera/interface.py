@@ -69,21 +69,3 @@ class Camera:
 
         return subregions
 
-
-if __name__ == '__main__':
-    cam = Camera(
-            ip_address='192.168.1.108',
-            port=80,
-            username='admin',
-            password='Favoritemovie1'
-        )
-    cam.snap()
-    vals = cam.crop_all(
-            [
-                (0, 0, 640, 640),
-                (640, 640, 1280, 1280)
-            ]
-        )
-    cam.pil_image.show()
-    vals[0].show()
-    vals[1].show()
