@@ -1,5 +1,4 @@
 from printwatch.client import PrintWatch
-from printwatch.client import *
 from time import sleep
 
 # Create Client object

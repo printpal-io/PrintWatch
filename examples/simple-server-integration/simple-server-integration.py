@@ -1,6 +1,4 @@
 from printwatch.client import PrintWatch
-from printwatch.utils import *
-from time import sleep
 from flask import Flask
 
 app = Flask(__name__)
