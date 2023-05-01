@@ -5,11 +5,14 @@ from time import sleep
 # Create Client object
 client = PrintWatch("INSERT_API_KEY")
 
+# Define the camera's snapshot endpoint
+WEBCAM_URL = 'http://localhost:8000/webcam/?action=snapshot'
+
 # Main control loop
-# on a single image/new image has to be loaded every time
+# on a single image grabbed from the WEBCAM_URL defined above
 while True:
     # Send the API request
-    response = client.infer('img.jpg')
+    response = client.infer(WEBCAM_URL)
     print(response)
 
     '''
