@@ -34,7 +34,7 @@ from printwatch.utils import *
 from time import sleep
 
 # Create Client object
-client = PrintWatch("sub_1N2V6dEDu7u6sxLdCTwbpC5F")
+client = PrintWatch("")
 
 # Main control loop
 # on a single image/new image has to be loaded every time
