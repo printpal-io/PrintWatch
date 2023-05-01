@@ -68,4 +68,3 @@ class Camera:
             subregions.append(self._crop(region=region))
 
         return subregions
-
