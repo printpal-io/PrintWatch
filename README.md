@@ -24,14 +24,26 @@
   PrintWatch uses Artificial Intelligence to monitor your 3D prints for any defects that begin to form. The plugin takes the video feed from any camera and runs it through a Machine Learning model that detects print defects in real-time. This repository is for custom integrations of the API, if you are using OctoPrint, refer to the <a href="https://github.com/printpal-io/OctoPrint-PrintWatch">OctoPrint-PrintWatch repository</a>
 </p>
 
+## Installation
 
-<details open>
-<summary>Inference</summary>
+Begin by cloning the repository
+
+```sh
+git clone https://github.com/printpal-io/PrintWatch.git
+```
+
+Enter the working directory
+
+```sh
+cd PrintWatch
+```
+
+## Usage
+
+Create a file and import the printwatch object
 
 ```python
 from printwatch.client import PrintWatch
-from printwatch.client import *
-from time import sleep
 
 # Create Client object
 client = PrintWatch("INSERT_API_KEY")
@@ -49,6 +61,13 @@ while True:
     '''
     # Wait 10.0 seconds
     sleep(10.0)
-
 ```
-</details>
+
+## Example code
+
+The examples folder contains boilerplate code for a few common use cases and can found in [examples](https://github.com/printpal-io/PrintWatch/tree/main/examples). It includes code for:
+
+* Defect detection on image files
+* Defect detection on a webcam (HTTP) stream
+* Asynchronous defect detection on a webcam (HTTP) stream
+* Integrating defect detection into your server or cloud system
