@@ -38,6 +38,12 @@ Enter the working directory
 cd PrintWatch
 ```
 
+Install dependencies
+
+```sh
+pip install -r requirements.txt
+```
+
 ## Usage
 
 Create a file and import the printwatch object
