@@ -15,7 +15,7 @@ class PrinterInfo:
         api_key : str = '',
         printer_id : str = uuid4().hex,
         ticket_id : str = uuid4().hex
-    ):
+        ):
         self.payload = {
             'api_key' : api_key,
             'printer_id' : printer_id,
@@ -39,11 +39,9 @@ class PrinterInfo:
 
     def create_ticket(self):
         self.payload['ticket_id'] = uuid4().hex
-        #self.payload['ticket_id'] = uuid4().hex
 
     def clear_ticket(self):
         self.payload['ticket_id'] = ''
-        #self.payload['ticket_id'] = ''
 
     def update_job_info(
             self,
@@ -155,8 +153,8 @@ class Scheduler:
         self.task = asyncio.ensure_future(self._run_loop())
         self._run = True
         self._callback = callback
-        if standalone:
-            asyncio.get_event_loop().run_forever()
+        if not standalone:
+            self.run()
 
     async def _run_loop(self):
         '''
@@ -192,6 +190,9 @@ class Scheduler:
     def cancel(self):
         self._run = False
         self.task.cancel()
+
+    def run(self):
+        asyncio.get_event_loop().run_forever()
 
 class ROI():
     def _get_cropped_area(image, coords : tuple):
