@@ -1,6 +1,5 @@
 from .client import *
 from .utils import *
-from .interface import *
 from uuid import uuid4
 from initializers import *
 import asyncio
