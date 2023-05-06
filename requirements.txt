@@ -1,4 +1,4 @@
-pip install aiohttp[speedups]
+aiohttp[speedups]
 typing
 requests
 Pillow
