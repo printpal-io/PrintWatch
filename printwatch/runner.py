@@ -1,10 +1,8 @@
 from .client import *
 from .utils import *
 from uuid import uuid4
-from initializers import *
 import asyncio
 import time
-from copy import deepcopy
 
 
 
@@ -19,6 +17,7 @@ class Runner:
             self,
 
         ):
+        self.monitors = []
         self.api = API()
         self.api_thread = self.api.spawn_process()
         self._runner = Scheduler(
@@ -48,3 +47,29 @@ class Runner:
 
         except Exception as e:
             print('{}'.format(str(e)))
+
+    def add_monitor(
+            self,
+            api_key : str,
+            printer_id : str = uuid4().hex,
+            api_client : PrintWatchClient = None,
+            source : str : None
+        ):
+        if api_client is None:
+            api_client = PrintWatch(
+                                api_key=api_key,
+                                printer_id=printer_id,
+                                source=source
+                            )
+
+        loop = LoopHandler(api_client)
+
+        self.monitors.append(
+            [
+                uuid4().hex,
+                loop = loop
+                Scheduler(
+                    callback = loop._run_once
+                )
+            ]
+        )

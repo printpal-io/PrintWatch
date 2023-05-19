@@ -1,6 +1,8 @@
 from printwatch.client import PrintWatch
 from time import sleep
 
+
+API_KEY = "sub_1My6bNEDu7u6sxLduFwZLh93"
 # Create Client object
 client = PrintWatch("INSERT_API_KEY")
 

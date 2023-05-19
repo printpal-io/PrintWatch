@@ -3,7 +3,6 @@ from typing import Union, List
 
 
 def handle_buffer(
-            self,
             buffer : List[List[float]],
             scores : List[float],
             levels : List[bool],
@@ -30,9 +29,9 @@ def handle_buffer(
     return buffer, scores, levels
 
 
-def trigger_condition(
-        notify_conditions : List = [],
-        action_conditions : List = [],
+def default_condition(
+        notify_conditions : List = [True],
+        action_conditions : List = [True],
         type : str = 'notify'
     ):
     '''
@@ -77,9 +76,8 @@ def last_n_notifications_interval(
 
 
 async def handle_action(
-        self,
         levels : List[bool],
-        trigger_condition,
+        trigger_condition = default_condition,
         pause_print : bool = False,
         action_method = None,
         notifications : bool = False
@@ -98,18 +96,18 @@ async def handle_action(
         action_result = action_method()
 
         if notifications:
-            response = await _async_notify(
+            response = await async_notify(
                                     notification_level=notification_level
                                 )
             return 0, action_result, response
 
-        return 1, action_result
+        return 1, action_result, None
 
     elif levels[0] and trigger_condition('notify'):
         notification_level = 'warning'
 
-        response = await _async_notify(
+        response = await async_notify(
                                 notification_level=notification_level
                             )
-        return 2, response
-    return 3, None
+        return 2, None, response
+    return 3, None, None

@@ -2,4 +2,3 @@ aiohttp[speedups]
 typing
 requests
 Pillow
-amcrest

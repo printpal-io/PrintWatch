@@ -209,7 +209,15 @@ class ROI():
         for ele in slices:
             idx = slices.index(ele)
 
-            base_image.rectangle([(regions[idx][0], regions[idx][1]), (regions[idx][2], regions[idx][3])], fill = None, outline = 'red', width = int(ceil(0.002 * sqrt(image.size[0] * image.size[1]))))
+            base_image.rectangle(
+                            [
+                                (regions[idx][0], regions[idx][1]),
+                                (regions[idx][2], regions[idx][3])
+                            ],
+                            fill = None,
+                            outline = 'red',
+                            width = int(ceil(0.002 * sqrt(image.size[0] * image.size[1])))
+            )
             ele.show()
         image.show()
 
@@ -225,8 +233,14 @@ class InferencePayloadError(Exception):
     def __init__(self, e):
         super().__init__(f'Invalid inference payload: {e}')
 
-def init_default(api_key : str) -> PrinterInfo:
-    info = PrinterInfo(api_key=api_key)
+def init_default(
+        api_key : str,
+        printer_id : str = uuid4().hex
+    ) -> PrinterInfo:
+    info = PrinterInfo(
+                api_key=api_key,
+                printer_id=printer_id
+            )
     info.update_job_info(
         state = 0,
         printTime = 600,
