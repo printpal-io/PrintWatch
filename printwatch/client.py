@@ -4,13 +4,14 @@ from .utils import *
 from base64 import b64encode
 from typing import List, Union
 import datetime
+from uuid import uuid4
 
 
 class PrintWatch():
     def __init__(
             self,
             api_key : str,
-            printer_id : str = None
+            printer_id : str = uuid4().hex,
             source : str = None
         ):
         self.route = 'https://ai.printpal.io'
@@ -37,7 +38,6 @@ class PrintWatch():
         Returns:
         - payload : dict - The json-formatted payload to send via POST request
         '''
-
         payload = self.printer_info.payload
         if encoded_image is None:
             p = {}
@@ -187,21 +187,21 @@ class PrintWatch():
                 notification_level : str = 'warning'
         ):
         '''
-    Returns the notification endpoint response in an asynchrnous function call
+        Returns the notification endpoint response in an asynchrnous function call
 
-    Inputs:
-    - printer_info : PrinterInfo - payload information for API call
-    - api_client : PrintWatchClient - the client object to us for the API call
-    - notification_level : str - the notification level to report to the API
+        Inputs:
+        - printer_info : PrinterInfo - payload information for API call
+        - api_client : PrintWatchClient - the client object to us for the API call
+        - notification_level : str - the notification level to report to the API
 
-    Returns:
-    - response : Flask.Response - inference response
-    '''
-    payload = self._create_payload(
-                            None,
-                            notify=True,
-                            notification_level=notification_level
-                        )
+        Returns:
+        - response : Flask.Response - inference response
+        '''
+        payload = self._create_payload(
+                                None,
+                                notify=True,
+                                notification_level=notification_level
+                            )
 
-    response = await self._send_async('api/v2/notify', payload)
-    return response
+        response = await self._send_async('api/v2/notify', payload)
+        return response
