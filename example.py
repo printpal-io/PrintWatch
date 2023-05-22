@@ -2,9 +2,9 @@ from printwatch.client import PrintWatch
 from time import sleep
 
 
-API_KEY = "YOUR_API_KEY"
+API_KEY = "INSERT_API_KEY"
 # Create Client object
-client = PrintWatch("INSERT_API_KEY")
+client = PrintWatch(API_KEY)
 
 # Main control loop
 # on a single image/new image has to be loaded every time
