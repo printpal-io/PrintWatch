@@ -14,7 +14,7 @@ class PrintWatch():
             printer_id : str = uuid4().hex,
             source : str = None
         ):
-        self.route = 'https://ai.printpal.io'
+        self.route = 'https://octoprint.printpal.io'
         self.printer_info = init_default(
                                 api_key=api_key,
                                 printer_id = printer_id
